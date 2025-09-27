@@ -13,7 +13,3 @@ class Solution(object):
             prev_value = value
         return total
 
-if __name__ == "__main__":
-    solution = Solution()
-    roman = "MCMXCIV"
-    print("Integer value of", roman, "is", solution.romanToInt(roman))
