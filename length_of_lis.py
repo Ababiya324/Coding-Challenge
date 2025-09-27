@@ -11,7 +11,3 @@ class Solution(object):
                 sub[i] = x
         return len(sub)
 
-if __name__ == "__main__":
-    solution = Solution()
-    nums = [10, 9, 2, 5, 3, 7, 101, 18]
-    print("Length of LIS:", solution.lengthOfLIS(nums))
