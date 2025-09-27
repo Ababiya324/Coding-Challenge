@@ -1,13 +1,10 @@
-import bisect
-
-class Solution(object):
-    def lengthOfLIS(self, nums):
-        sub = []
-        for x in nums:
-            i = bisect.bisect_left(sub, x)
-            if i == len(sub):
-                sub.append(x)
-            else:
-                sub[i] = x
-        return len(sub)
-
+def LIS(arr):
+    n = len(arr)
+    dp = [1] * n
+    
+    for i in range(n):
+        for j in range(i):
+            if arr[j] < arr[i]:
+                dp[i] = max(dp[i], dp[j] + 1)
+    
+    return max(dp)
