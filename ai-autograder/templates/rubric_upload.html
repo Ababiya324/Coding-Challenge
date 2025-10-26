@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name }} - Upload Rubric</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1>{{ app_name }}</h1>
+            <ul class="nav-links">
+                <li><a href="/">Grade</a></li>
+                <li><a href="/rubric-upload" class="active">Upload Rubric</a></li>
+                <li><a href="/analytics">Analytics</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="upload-section">
+            <section class="card">
+                <h2>Upload Exam Rubric (PDF)</h2>
+                <p>Upload your exam rubric as a PDF. The system will extract grading criteria using AI.</p>
+
+                <form id="rubric-upload-form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="rubric-name">Rubric Name:</label>
+                        <input type="text" id="rubric-name" name="name" class="form-control"
+                               placeholder="e.g., Exam 2 - Data Structures" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pdf-upload">PDF File:</label>
+                        <div class="file-upload-area" id="file-upload-area">
+                            <input type="file" id="pdf-upload" name="file" accept=".pdf" required>
+                            <div class="upload-placeholder">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                                </svg>
+                                <p>Drag and drop PDF here, or click to browse</p>
+                                <small>PDF files only, max 10MB</small>
+                            </div>
+                            <div class="file-info" style="display: none;">
+                                <span class="file-name"></span>
+                                <button type="button" class="btn-remove">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg" id="upload-button">
+                        Upload & Extract Rubric
+                    </button>
+                </form>
+            </section>
+
+            <section class="card" id="preview-section" style="display: none;">
+                <h2>Extracted Rubric Preview</h2>
+                <div id="extraction-status" class="status-message"></div>
+                <div id="rubric-preview-content"></div>
+
+                <div class="button-group">
+                    <button id="edit-rubric-button" class="btn btn-secondary">
+                        Edit Rubric
+                    </button>
+                    <button id="create-exam-button" class="btn btn-primary">
+                        Create Exam with This Rubric
+                    </button>
+                </div>
+            </section>
+
+            <section class="card" id="existing-rubrics-section">
+                <h2>Existing Rubrics</h2>
+                <div id="rubrics-list"></div>
+            </section>
+
+            <div id="loading-overlay" class="loading-overlay" style="display: none;">
+                <div class="spinner"></div>
+                <p>Extracting rubric from PDF... This may take a minute.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initRubricUploadPage();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name }} - Results</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1>{{ app_name }}</h1>
+            <ul class="nav-links">
+                <li><a href="/">Grade</a></li>
+                <li><a href="/rubric-upload">Upload Rubric</a></li>
+                <li><a href="/analytics">Analytics</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="results-view">
+            <section class="card">
+                <h2>Grading Results</h2>
+
+                <div class="result-header">
+                    <div class="result-info">
+                        <p><strong>Student ID:</strong> {{ submission.student_id }}</p>
+                        <p><strong>Exam:</strong> {{ exam.exam_name }}</p>
+                        <p><strong>Submitted:</strong> {{ submission.submitted_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                        {% if submission.graded_at %}
+                        <p><strong>Graded:</strong> {{ submission.graded_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="result-score">
+                        <div class="score-circle">
+                            <span class="percentage">{{ "%.1f"|format(submission.percentage) }}%</span>
+                            <span class="points">{{ submission.total_score }}/{{ submission.total_possible }}</span>
+                        </div>
+                        {% if submission.grade_letter %}
+                        <div class="grade-letter">{{ submission.grade_letter }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Question-by-Question Breakdown</h2>
+
+                {% for qr in question_results %}
+                <div class="question-result">
+                    <div class="question-header">
+                        <h3>Question {{ qr.question_number }}</h3>
+                        <span class="question-type">{{ qr.question_type.value }}</span>
+                        <span class="question-score">
+                            {{ qr.points_earned }}/{{ qr.points_possible }} pts
+                            ({{ "%.1f"|format((qr.points_earned / qr.points_possible * 100) if qr.points_possible > 0 else 0) }}%)
+                        </span>
+                    </div>
+
+                    {% if qr.student_answer_text %}
+                    <div class="student-answer">
+                        <h4>Student's Answer:</h4>
+                        <pre>{{ qr.student_answer_text }}</pre>
+                    </div>
+                    {% endif %}
+
+                    {% if qr.criterion_scores %}
+                    <div class="criterion-breakdown">
+                        <h4>Criterion Breakdown:</h4>
+                        {% set criteria = qr.criterion_scores | from_json %}
+                        <table class="criterion-table">
+                            <thead>
+                                <tr>
+                                    <th>Criterion</th>
+                                    <th>Score</th>
+                                    <th>Feedback</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for criterion in criteria %}
+                                <tr>
+                                    <td>{{ criterion.criterion_name }}</td>
+                                    <td>{{ criterion.points_earned }}/{{ criterion.points_possible }}</td>
+                                    <td>{{ criterion.specific_feedback }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+
+                    <div class="feedback">
+                        <h4>Feedback:</h4>
+                        <p>{{ qr.overall_feedback }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+
+            <div class="action-buttons">
+                <button onclick="window.print()" class="btn btn-secondary">Print Results</button>
+                <a href="/" class="btn btn-primary">Grade Another Submission</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

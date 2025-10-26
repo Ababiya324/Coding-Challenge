@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name }} - Analytics</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1>{{ app_name }}</h1>
+            <ul class="nav-links">
+                <li><a href="/">Grade</a></li>
+                <li><a href="/rubric-upload">Upload Rubric</a></li>
+                <li><a href="/analytics" class="active">Analytics</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="analytics-dashboard">
+            <section class="card">
+                <h2>Exam Analytics</h2>
+
+                <div class="form-group">
+                    <label for="exam-select-analytics">Select Exam:</label>
+                    <select id="exam-select-analytics" class="form-control">
+                        <option value="">Choose an exam...</option>
+                        {% for exam in exams %}
+                        <option value="{{ exam.id }}">{{ exam.exam_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </section>
+
+            <section class="card" id="stats-overview" style="display: none;">
+                <h2>Overview Statistics</h2>
+                <div class="stats-grid" id="stats-grid"></div>
+            </section>
+
+            <section class="card" id="question-stats" style="display: none;">
+                <h2>Question Statistics</h2>
+                <div id="question-stats-content"></div>
+            </section>
+
+            <section class="card" id="grade-distribution" style="display: none;">
+                <h2>Grade Distribution</h2>
+                <div id="grade-chart"></div>
+            </section>
+        </div>
+    </main>
+
+    <script src="/static/js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initAnalyticsPage();
+        });
+    </script>
+</body>
+</html>
