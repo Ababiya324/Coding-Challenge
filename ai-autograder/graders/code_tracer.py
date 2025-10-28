@@ -11,7 +11,7 @@ from difflib import SequenceMatcher
 
 from config import CODE_TRACING_EXTRACTION_PROMPT, settings
 from models import CodeTracingGradeResult, CodeTracingExtraction, QuestionType
-from utils.claude_client import ClaudeClient
+from utils.gemini_client import GeminiClient
 
 
 class CodeExecutionError(Exception):
@@ -27,14 +27,14 @@ class CodeTracerGrader:
     3. Comparing student's answer with actual output
     """
 
-    def __init__(self, claude_client: ClaudeClient):
+    def __init__(self, gemini_client: GeminiClient):
         """
         Initialize code tracer grader
 
         Args:
-            claude_client: Claude API client for answer extraction
+            gemini_client: Gemini API client for answer extraction
         """
-        self.claude = claude_client
+        self.gemini = gemini_client
         self.execution_timeout = settings.CODE_EXECUTION_TIMEOUT
         self.similarity_threshold = settings.SIMILARITY_THRESHOLD
 
@@ -127,7 +127,7 @@ class CodeTracerGrader:
         question_description: str
     ) -> CodeTracingExtraction:
         """
-        Extract student's written answer from image using Claude Vision
+        Extract student's written answer from image using Gemini Vision
 
         Args:
             image_path: Path to student answer image
@@ -141,7 +141,7 @@ class CodeTracerGrader:
         )
 
         try:
-            result = await self.claude.extract_student_answer(
+            result = await self.gemini.extract_student_answer(
                 image=image_path,
                 prompt=prompt
             )
@@ -372,14 +372,14 @@ class CodeTracerGrader:
         )
 
 
-def create_code_tracer_grader(claude_client: ClaudeClient) -> CodeTracerGrader:
+def create_code_tracer_grader(gemini_client: GeminiClient) -> CodeTracerGrader:
     """
     Factory function to create CodeTracerGrader
 
     Args:
-        claude_client: Claude API client
+        gemini_client: Gemini API client
 
     Returns:
         CodeTracerGrader instance
     """
-    return CodeTracerGrader(claude_client=claude_client)
+    return CodeTracerGrader(gemini_client=gemini_client)

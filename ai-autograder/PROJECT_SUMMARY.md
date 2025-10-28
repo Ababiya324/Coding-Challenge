@@ -10,7 +10,7 @@ A production-ready, AI-powered exam autograding system that handles multiple que
 - **Lines of Code:** ~5,000+
 - **Languages:** Python, HTML, CSS, JavaScript
 - **Database:** SQLite
-- **AI Model:** Claude 3.5 Sonnet
+- **AI Model:** Gemini 1.5 Flash
 - **Documentation:** 5 comprehensive guides
 
 ## 🗂️ File Structure (25 Files)
@@ -116,7 +116,7 @@ PROJECT_SUMMARY.md - This file
 - aiosqlite - Async database operations
 
 **AI/ML:**
-- Anthropic Claude 3.5 Sonnet - Vision + Text AI
+- Google Gemini 3.5 Sonnet - Vision + Text AI
 - pdf2image - PDF to image conversion
 - Pillow - Image processing
 
@@ -331,6 +331,6 @@ A complete, production-ready AI exam autograding system that:
 
 ---
 
-**Built with:** Python, FastAPI, Claude AI, SQLite
+**Built with:** Python, FastAPI, Google Gemini AI, SQLite
 **Version:** 1.0.0
 **Date:** 2024

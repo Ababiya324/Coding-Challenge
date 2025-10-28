@@ -274,7 +274,7 @@ Complete documentation suite:
 
 - **Backend:** FastAPI (modern, async Python framework)
 - **Frontend:** Vanilla JavaScript (no framework overhead)
-- **AI:** Anthropic Claude (Vision + Text)
+- **AI:** Google Gemini (Vision + Text)
 - **Database:** SQLite (zero-config, portable)
 - **PDF:** pdf2image, PyPDF2
 - **Images:** Pillow (PIL)

@@ -23,12 +23,12 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables"""
 
     # API Keys
-    ANTHROPIC_API_KEY: str
+    GEMINI_API_KEY: str
 
-    # Claude API Settings
-    CLAUDE_MODEL: str = "claude-3-5-sonnet-20241022"
-    CLAUDE_MAX_TOKENS: int = 4096
-    CLAUDE_TEMPERATURE: float = 0.0
+    # Gemini API Settings
+    GEMINI_MODEL: str = "gemini-1.5-flash"  # Free tier model with vision support
+    GEMINI_MAX_TOKENS: int = 8192
+    GEMINI_TEMPERATURE: float = 0.0
 
     # Database
     DATABASE_URL: str = f"sqlite:///{DATABASE_DIR / 'autograder.db'}"

@@ -5,7 +5,7 @@ Get up and running in 5 minutes!
 ## Prerequisites Checklist
 
 - [ ] Python 3.8+ installed
-- [ ] Anthropic API key ([Get one free](https://console.anthropic.com/))
+- [ ] Google Gemini API key (FREE!) ([Get one free](https://aistudio.google.com/app/apikey))
 - [ ] Poppler installed (see below)
 
 ## Installation (Windows)
@@ -34,7 +34,7 @@ pip install -r requirements.txt
 copy .env.example .env
 
 # Edit .env and add your API key:
-# ANTHROPIC_API_KEY=sk-ant-xxxxx
+# GEMINI_API_KEY=your_key_here
 ```
 
 ### 4. Run the Application

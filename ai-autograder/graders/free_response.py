@@ -12,7 +12,7 @@ from models import (
     CriterionEvaluation,
     QuestionType
 )
-from utils.claude_client import ClaudeClient
+from utils.gemini_client import GeminiClient
 
 
 class FreeResponseGrader:
@@ -20,14 +20,14 @@ class FreeResponseGrader:
     Grades free response questions using AI and professor's rubric from PDF
     """
 
-    def __init__(self, claude_client: ClaudeClient):
+    def __init__(self, gemini_client: GeminiClient):
         """
         Initialize free response grader
 
         Args:
-            claude_client: Claude API client
+            gemini_client: Gemini API client
         """
-        self.claude = claude_client
+        self.gemini = gemini_client
 
     async def grade_with_rubric(
         self,
@@ -48,8 +48,8 @@ class FreeResponseGrader:
         prompt = self._build_grading_prompt(rubric_question)
 
         try:
-            # Send to Claude for grading
-            result = await self.claude.grade_free_response(
+            # Send to Gemini for grading
+            result = await self.gemini.grade_free_response(
                 student_image=student_image_path,
                 prompt=prompt
             )
@@ -80,7 +80,7 @@ class FreeResponseGrader:
             rubric_question: Question with grading criteria
 
         Returns:
-            Formatted prompt for Claude
+            Formatted prompt for Gemini
         """
         # Format rubric criteria
         criteria_text = self._format_criteria(rubric_question)
@@ -142,10 +142,10 @@ Total Points: {rubric_question.points_possible}
         rubric_question: RubricQuestion
     ) -> FreeResponseGradeResult:
         """
-        Parse Claude's grading result and validate
+        Parse Gemini's grading result and validate
 
         Args:
-            result: Raw result dict from Claude
+            result: Raw result dict from Gemini
             rubric_question: Original question for validation
 
         Returns:
@@ -232,7 +232,7 @@ Provide detailed grading in JSON format with:
 """
 
         try:
-            result = await self.claude.grade_free_response(
+            result = await self.gemini.grade_free_response(
                 student_image=student_image_path,
                 prompt=prompt
             )
@@ -336,14 +336,14 @@ Provide detailed grading in JSON format with:
         return "\n".join(lines)
 
 
-def create_free_response_grader(claude_client: ClaudeClient) -> FreeResponseGrader:
+def create_free_response_grader(gemini_client: GeminiClient) -> FreeResponseGrader:
     """
     Factory function to create FreeResponseGrader
 
     Args:
-        claude_client: Claude API client
+        gemini_client: Gemini API client
 
     Returns:
         FreeResponseGrader instance
     """
-    return FreeResponseGrader(claude_client=claude_client)
+    return FreeResponseGrader(gemini_client=gemini_client)

@@ -1,6 +1,6 @@
 # AI Exam Autograder with PDF Rubric Upload
 
-A comprehensive AI-powered exam autograding system that handles multiple question types with PDF rubric support. Built with FastAPI, Claude AI, and modern web technologies.
+A comprehensive AI-powered exam autograding system that handles multiple question types with PDF rubric support. Built with FastAPI, Google Gemini AI, and modern web technologies.
 
 ## Features
 
@@ -74,7 +74,7 @@ ai-autograder/
 ### Prerequisites
 
 - Python 3.8 or higher
-- Anthropic API key ([Get one here](https://console.anthropic.com/))
+- Google Gemini API key (FREE!) ([Get one here](https://aistudio.google.com/app/apikey))
 - Poppler (for PDF processing)
 
 ### Step 1: Install Python Dependencies
@@ -108,9 +108,9 @@ sudo apt-get install poppler-utils
 cp .env.example .env
 ```
 
-2. Edit `.env` and add your Anthropic API key:
+2. Edit `.env` and add your Google Gemini API key (FREE!):
 ```
-ANTHROPIC_API_KEY=your_actual_api_key_here
+GEMINI_API_KEY=your_actual_api_key_here
 ```
 
 ### Step 4: Run the Application
@@ -246,8 +246,8 @@ Edit `.env` to customize:
 
 ```bash
 # API Settings
-ANTHROPIC_API_KEY=your_key
-CLAUDE_MODEL=claude-3-5-sonnet-20241022
+GEMINI_API_KEY=your_key
+GEMINI_MODEL=gemini-1.5-flash  # FREE tier
 
 # PDF Processing
 PDF_DPI=300                # Higher = better quality, larger files
@@ -265,7 +265,7 @@ CODE_EXECUTION_TIMEOUT=5   # Max code execution time (seconds)
 
 ### "Invalid API key" Error
 
-**Solution:** Check your `.env` file has the correct `ANTHROPIC_API_KEY`
+**Solution:** Check your `.env` file has the correct `GEMINI_API_KEY`
 
 ### Rubric extraction fails
 

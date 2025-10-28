@@ -40,7 +40,7 @@ from models import (
     QuestionType
 )
 from utils.pdf_handler import create_pdf_handler
-from utils.claude_client import create_claude_client
+from utils.gemini_client import create_gemini_client
 from utils.image_processor import create_image_processor
 from utils.export import create_results_exporter
 from graders.rubric_parser import create_rubric_parser
@@ -63,14 +63,14 @@ templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 # Initialize utilities
 pdf_handler = create_pdf_handler(dpi=settings.PDF_DPI, image_format=settings.PDF_FORMAT)
-claude_client = create_claude_client()
+gemini_client = create_gemini_client()
 image_processor = create_image_processor()
 results_exporter = create_results_exporter()
 
 # Initialize graders
-rubric_parser = create_rubric_parser(claude_client, pdf_handler)
-code_tracer = create_code_tracer_grader(claude_client)
-free_response_grader = create_free_response_grader(claude_client)
+rubric_parser = create_rubric_parser(gemini_client, pdf_handler)
+code_tracer = create_code_tracer_grader(gemini_client)
+free_response_grader = create_free_response_grader(gemini_client)
 
 
 # ==================== Startup/Shutdown Events ====================

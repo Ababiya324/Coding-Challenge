@@ -9,23 +9,23 @@ from PIL import Image
 from config import RUBRIC_EXTRACTION_PROMPT
 from models import ExtractedRubric, ExamMetadata, RubricQuestion
 from utils.pdf_handler import PDFHandler
-from utils.claude_client import ClaudeClient
+from utils.gemini_client import GeminiClient
 
 
 class RubricParser:
     """
-    Extracts and structures grading criteria from PDF rubrics using Claude Vision
+    Extracts and structures grading criteria from PDF rubrics using Gemini Vision
     """
 
-    def __init__(self, claude_client: ClaudeClient, pdf_handler: PDFHandler):
+    def __init__(self, gemini_client: GeminiClient, pdf_handler: PDFHandler):
         """
         Initialize rubric parser
 
         Args:
-            claude_client: Claude API client
+            gemini_client: Gemini API client
             pdf_handler: PDF processing handler
         """
-        self.claude = claude_client
+        self.gemini = gemini_client
         self.pdf_handler = pdf_handler
 
     async def parse_rubric_pdf(
@@ -98,13 +98,13 @@ class RubricParser:
         prompt = RUBRIC_EXTRACTION_PROMPT
 
         try:
-            result = await self.claude.extract_rubric_from_image(
+            result = await self.gemini.extract_rubric_from_image(
                 image=image,
                 prompt=prompt
             )
             return result
         except json.JSONDecodeError as e:
-            raise RuntimeError(f"Failed to parse JSON from Claude response: {str(e)}")
+            raise RuntimeError(f"Failed to parse JSON from Gemini response: {str(e)}")
         except Exception as e:
             raise RuntimeError(f"Failed to extract rubric from page: {str(e)}")
 
@@ -299,17 +299,17 @@ class RubricParser:
 
 
 def create_rubric_parser(
-    claude_client: ClaudeClient,
+    gemini_client: GeminiClient,
     pdf_handler: PDFHandler
 ) -> RubricParser:
     """
     Factory function to create a RubricParser
 
     Args:
-        claude_client: Claude API client
+        gemini_client: Gemini API client
         pdf_handler: PDF handler
 
     Returns:
         RubricParser instance
     """
-    return RubricParser(claude_client=claude_client, pdf_handler=pdf_handler)
+    return RubricParser(gemini_client=gemini_client, pdf_handler=pdf_handler)
