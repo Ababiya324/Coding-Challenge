@@ -1,0 +1,557 @@
+/**
+ * Language Identity Map - Animations
+ * Smooth transitions and micro-interactions
+ */
+
+/* ===== Fade In Animations ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Hero Section Animations */
+.fade-in {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.fade-in-delay-1 {
+    animation: fadeIn 1s ease-out 0.2s forwards;
+    opacity: 0;
+}
+
+.fade-in-delay-2 {
+    animation: fadeIn 1s ease-out 0.4s forwards;
+    opacity: 0;
+}
+
+.fade-in-delay-3 {
+    animation: fadeIn 1s ease-out 0.6s forwards;
+    opacity: 0;
+}
+
+/* ===== Pulse Animation for Story Pins ===== */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+.story-pin circle {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.story-pin:hover circle {
+    animation: none;
+}
+
+/* ===== Modal Animations ===== */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-overlay {
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Modal Exit Animation */
+.modal-overlay.closing {
+    animation: modalFadeOut 0.3s ease-out forwards;
+}
+
+.modal-overlay.closing .modal-content {
+    animation: modalSlideOut 0.3s ease-out forwards;
+}
+
+@keyframes modalFadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes modalSlideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+}
+
+/* ===== Scroll Reveal Animations ===== */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== Button Hover Effects ===== */
+@keyframes buttonPress {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+button:active {
+    animation: buttonPress 0.2s ease;
+}
+
+/* ===== Shimmer Effect for Loading ===== */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer {
+    background: linear-gradient(
+        to right,
+        #f0f0f0 0%,
+        #f8f8f8 20%,
+        #f0f0f0 40%,
+        #f0f0f0 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s linear infinite;
+}
+
+/* ===== Story Card Entrance ===== */
+.story-card {
+    animation: fadeInScale 0.5s ease-out backwards;
+}
+
+.story-card:nth-child(1) { animation-delay: 0s; }
+.story-card:nth-child(2) { animation-delay: 0.1s; }
+.story-card:nth-child(3) { animation-delay: 0.2s; }
+.story-card:nth-child(4) { animation-delay: 0.3s; }
+.story-card:nth-child(5) { animation-delay: 0.4s; }
+.story-card:nth-child(6) { animation-delay: 0.5s; }
+
+/* ===== Number Counter Animation ===== */
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-number {
+    animation: countUp 0.8s ease-out;
+}
+
+/* ===== Pin Drop Animation ===== */
+@keyframes pinDrop {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.story-pin {
+    animation: pinDrop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+/* Stagger pin animations */
+.story-pin:nth-child(1) { animation-delay: 0.1s; }
+.story-pin:nth-child(2) { animation-delay: 0.15s; }
+.story-pin:nth-child(3) { animation-delay: 0.2s; }
+.story-pin:nth-child(4) { animation-delay: 0.25s; }
+.story-pin:nth-child(5) { animation-delay: 0.3s; }
+.story-pin:nth-child(6) { animation-delay: 0.35s; }
+.story-pin:nth-child(7) { animation-delay: 0.4s; }
+.story-pin:nth-child(8) { animation-delay: 0.45s; }
+.story-pin:nth-child(9) { animation-delay: 0.5s; }
+.story-pin:nth-child(10) { animation-delay: 0.55s; }
+
+/* ===== Ripple Effect ===== */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-effect::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.ripple-effect:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* ===== Success Message Animation ===== */
+@keyframes successSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-message {
+    animation: successSlideIn 0.5s ease-out;
+}
+
+/* ===== Tooltip Animation ===== */
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tooltip-text {
+    animation: tooltipFadeIn 0.3s ease-out;
+}
+
+/* ===== Filter Controls Slide In ===== */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.filter-controls {
+    animation: slideDown 0.6s ease-out;
+}
+
+/* ===== Concept Card Hover Animation ===== */
+@keyframes cardGlow {
+    0%, 100% {
+        box-shadow: 0 4px 6px rgba(196, 18, 48, 0.1);
+    }
+    50% {
+        box-shadow: 0 8px 12px rgba(196, 18, 48, 0.2);
+    }
+}
+
+.concept-card:hover {
+    animation: cardGlow 2s ease-in-out infinite;
+}
+
+/* ===== Rotate Animation for Loading ===== */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rotating {
+    animation: rotate 2s linear infinite;
+}
+
+/* ===== Bounce Animation ===== */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.bounce {
+    animation: bounce 2s infinite;
+}
+
+/* ===== Shake Animation (for errors) ===== */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+/* ===== Gradient Animation for Hero Background ===== */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.hero {
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
+}
+
+/* ===== Typing Animation (optional for future use) ===== */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.typing-effect {
+    overflow: hidden;
+    border-right: 2px solid;
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
+}
+
+/* ===== Smooth Scroll Behavior ===== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ===== Page Load Animation ===== */
+@keyframes pageLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+body {
+    animation: pageLoad 0.5s ease-in;
+}
+
+/* ===== Focus Ring Animation ===== */
+@keyframes focusRing {
+    0% {
+        box-shadow: 0 0 0 0 rgba(196, 18, 48, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 6px rgba(196, 18, 48, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(196, 18, 48, 0);
+    }
+}
+
+*:focus {
+    animation: focusRing 0.6s ease-out;
+}
+
+/* ===== View Transition ===== */
+.view-transition {
+    animation: fadeInScale 0.4s ease-out;
+}
+
+/* ===== Skeleton Loading Animation ===== */
+@keyframes skeleton {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 25%,
+        #e0e0e0 50%,
+        #f0f0f0 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton 1.5s ease-in-out infinite;
+}
+
+/* ===== Hover Lift Effect ===== */
+.lift-on-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lift-on-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Stagger Animations for Lists ===== */
+.stagger-animation > * {
+    animation: fadeIn 0.6s ease-out backwards;
+}
+
+.stagger-animation > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-animation > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-animation > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-animation > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-animation > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-animation > *:nth-child(6) { animation-delay: 0.3s; }
+.stagger-animation > *:nth-child(7) { animation-delay: 0.35s; }
+.stagger-animation > *:nth-child(8) { animation-delay: 0.4s; }
+.stagger-animation > *:nth-child(9) { animation-delay: 0.45s; }
+.stagger-animation > *:nth-child(10) { animation-delay: 0.5s; }
+
+/* ===== Performance Optimization ===== */
+.will-animate {
+    will-change: transform, opacity;
+}
+
+/* Remove will-change after animation completes to save resources */
+.animated {
+    will-change: auto;
+}
+
+/* ===== Accessibility: Respect prefers-reduced-motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .story-pin circle {
+        animation: none !important;
+    }
+}
