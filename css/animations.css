@@ -1,0 +1,450 @@
+/* ==========================================
+   Language Identity Map - Animations
+   ========================================== */
+
+/* ==========================================
+   Fade-in Animations (Hero Section)
+   ========================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.fade-in-delay {
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.3s forwards;
+}
+
+.fade-in-delay-2 {
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.6s forwards;
+}
+
+.fade-in-delay-3 {
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.9s forwards;
+}
+
+/* ==========================================
+   Modal Animations
+   ========================================== */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal.active .modal-overlay {
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+.modal.active .modal-content {
+    animation: modalSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ==========================================
+   Story Dot Pulse Animation
+   ========================================== */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+.story-dot {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.story-dot:hover {
+    animation: none;
+}
+
+/* ==========================================
+   Counter Animation
+   ========================================== */
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.stat-number {
+    animation: countUp 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ==========================================
+   Button Ripple Effect
+   ========================================== */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ==========================================
+   Success Message Animation
+   ========================================== */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-message {
+    animation: slideDown 0.5s ease-out;
+}
+
+/* ==========================================
+   Tooltip Animation
+   ========================================== */
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.concept-tooltip {
+    animation: tooltipFadeIn 0.2s ease-out;
+}
+
+/* ==========================================
+   Scroll-triggered Animations
+   ========================================== */
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide-in-left {
+    animation: slideInFromLeft 0.8s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInFromRight 0.8s ease-out;
+}
+
+/* ==========================================
+   Shimmer Effect (Loading State)
+   ========================================== */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer {
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 0%,
+        #e0e0e0 50%,
+        #f0f0f0 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* ==========================================
+   Map Building Hover Animation
+   ========================================== */
+@keyframes buildingHighlight {
+    0%, 100% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(1.1);
+    }
+}
+
+.campus-building:hover {
+    animation: buildingHighlight 0.6s ease-in-out;
+}
+
+/* ==========================================
+   Tag Entrance Animation
+   ========================================== */
+@keyframes tagSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.story-tag {
+    animation: tagSlideIn 0.3s ease-out backwards;
+}
+
+.story-tag:nth-child(1) { animation-delay: 0s; }
+.story-tag:nth-child(2) { animation-delay: 0.1s; }
+.story-tag:nth-child(3) { animation-delay: 0.2s; }
+.story-tag:nth-child(4) { animation-delay: 0.3s; }
+
+/* ==========================================
+   Form Focus Animation
+   ========================================== */
+@keyframes inputFocus {
+    from {
+        box-shadow: 0 0 0 0 rgba(196, 18, 48, 0.4);
+    }
+    to {
+        box-shadow: 0 0 0 4px rgba(196, 18, 48, 0);
+    }
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    animation: inputFocus 0.6s ease-out;
+}
+
+/* ==========================================
+   Stat Card Stagger Animation
+   ========================================== */
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-card {
+    animation: cardFadeIn 0.6s ease-out backwards;
+}
+
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* ==========================================
+   Section Title Underline Animation
+   ========================================== */
+@keyframes underlineGrow {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100px;
+    }
+}
+
+.section-title::after {
+    animation: underlineGrow 0.8s ease-out;
+}
+
+/* ==========================================
+   Filter Controls Animation
+   ========================================== */
+@keyframes filterSlideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        max-height: 200px;
+        transform: translateY(0);
+    }
+}
+
+.filter-controls {
+    animation: filterSlideDown 0.5s ease-out;
+}
+
+/* ==========================================
+   Story Dot Entrance Animation
+   ========================================== */
+@keyframes dotAppear {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.story-dot.appear {
+    animation: dotAppear 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ==========================================
+   Navigation Button Hover
+   ========================================== */
+@keyframes buttonBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+.nav-button:hover:not(:disabled) {
+    animation: buttonBounce 0.4s ease-in-out;
+}
+
+/* ==========================================
+   Legend Fade In
+   ========================================== */
+@keyframes legendFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.legend {
+    animation: legendFadeIn 0.6s ease-out;
+}
+
+/* ==========================================
+   Smooth Transitions
+   ========================================== */
+/* Global smooth transitions */
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover transitions */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================
+   Loading Spinner (for future use)
+   ========================================== */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    border: 3px solid rgba(196, 18, 48, 0.2);
+    border-top-color: #C41230;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 0.8s linear infinite;
+}
+
+/* ==========================================
+   Page Load Animation
+   ========================================== */
+@keyframes pageLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+body {
+    animation: pageLoad 0.5s ease-out;
+}
+
+/* ==========================================
+   Accessibility - Respect Prefers Reduced Motion
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .story-dot {
+        animation: none;
+    }
+}

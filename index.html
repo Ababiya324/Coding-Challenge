@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive map exploring linguistic identity experiences at CMU-Q">
+    <title>Language Identity Map - CMU-Q</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title fade-in">Voices Unheard: A Map of Linguistic Identity at CMU-Q</h1>
+            <p class="hero-subtitle fade-in-delay">Exploring the hidden experiences of multilingual students navigating identity, shame, and pride</p>
+            <p class="hero-description fade-in-delay-2">
+                In the multilingual landscape of Carnegie Mellon University Qatar, students navigate complex linguistic identities daily.
+                This interactive map reveals their stories—moments of shame, pride, and negotiation in institutional spaces.
+            </p>
+            <button class="cta-button fade-in-delay-3" onclick="scrollToMap()" aria-label="Explore the interactive map">
+                Explore the Map
+            </button>
+        </div>
+    </section>
+
+    <!-- Statistics Dashboard -->
+    <section id="stats" class="stats-section">
+        <div class="container">
+            <h2 class="section-title">By the Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-stories">0</div>
+                    <div class="stat-label">Student Stories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="total-languages">0</div>
+                    <div class="stat-label">Languages Represented</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="shame-percentage">0%</div>
+                    <div class="stat-label">Report Linguistic Shame</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="locations-count">6</div>
+                    <div class="stat-label">Campus Locations</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Map Section -->
+    <section id="map-section" class="map-section">
+        <div class="container">
+            <h2 class="section-title">Interactive Campus Map</h2>
+            <p class="section-description">Click on any location to explore student stories. Colored dots indicate different types of linguistic experiences.</p>
+
+            <!-- Filter Controls -->
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label for="filter-type">Experience Type:</label>
+                    <select id="filter-type" aria-label="Filter by experience type">
+                        <option value="all">All Types</option>
+                        <option value="Linguistic Shame">Linguistic Shame</option>
+                        <option value="Linguistic Pride">Linguistic Pride</option>
+                        <option value="Code-Switching">Code-Switching</option>
+                        <option value="Identity Negotiation">Identity Negotiation</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-language">Language:</label>
+                    <select id="filter-language" aria-label="Filter by language">
+                        <option value="all">All Languages</option>
+                        <option value="Arabic">Arabic</option>
+                        <option value="English">English</option>
+                        <option value="Multilingual">Multilingual (3+)</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-background">Student Background:</label>
+                    <select id="filter-background" aria-label="Filter by student background">
+                        <option value="all">All Backgrounds</option>
+                        <option value="Qatari">Qatari National</option>
+                        <option value="GCC">GCC National</option>
+                        <option value="International">International</option>
+                    </select>
+                </div>
+
+                <button class="reset-button" onclick="resetFilters()" aria-label="Reset all filters">
+                    Reset Filters
+                </button>
+            </div>
+
+            <!-- Legend -->
+            <div class="legend">
+                <h3>Legend</h3>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <span class="legend-dot shame"></span>
+                        <span>Linguistic Shame</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot pride"></span>
+                        <span>Linguistic Pride</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot code-switching"></span>
+                        <span>Code-Switching</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot negotiation"></span>
+                        <span>Identity Negotiation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campus Map -->
+            <div id="campus-map" class="campus-map" role="application" aria-label="Interactive campus map">
+                <!-- Map will be dynamically generated by map.js -->
+            </div>
+
+            <!-- Story Counter -->
+            <div class="story-counter">
+                <span id="visible-stories-count">0</span> stories shown
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Modal -->
+    <div id="story-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()" aria-label="Close modal">&times;</button>
+            <div id="modal-body">
+                <!-- Story content will be dynamically inserted -->
+            </div>
+            <div class="modal-navigation">
+                <button id="prev-story" class="nav-button" onclick="navigateStory(-1)" aria-label="Previous story">
+                    ← Previous
+                </button>
+                <button id="next-story" class="nav-button" onclick="navigateStory(1)" aria-label="Next story">
+                    Next →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About This Project</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Context: Linguistic Identity in the Gulf</h3>
+                    <p>
+                        At Carnegie Mellon University Qatar, students from over 50 countries navigate a complex multilingual
+                        environment. English dominates academic spaces, while Arabic serves as the local lingua franca. Students
+                        frequently experience <span class="tooltip" data-concept="Linguistic Shame">linguistic shame</span>,
+                        moments where their accent, language choice, or code-switching is policed or stigmatized.
+                    </p>
+
+                    <h3>Theoretical Framework</h3>
+                    <p>
+                        This project draws on several key concepts:
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>Linguistic Shame (Sara Hillman, 2019):</strong> The emotional response to perceived
+                            linguistic inadequacy, often resulting from institutional language hierarchies.
+                        </li>
+                        <li>
+                            <strong>Translanguaging (García & Wei):</strong> The natural, fluid use of multiple languages
+                            as a unified repertoire rather than separate systems.
+                        </li>
+                        <li>
+                            <strong>Chronotope (Blommaert):</strong> How specific times and spaces shape which languages
+                            are valued, creating pressure to perform particular linguistic identities.
+                        </li>
+                        <li>
+                            <strong>Enoughness:</strong> The constant negotiation of being "enough"—Arab enough, Western
+                            enough, fluent enough—in institutional spaces that demand impossible authenticity.
+                        </li>
+                    </ul>
+
+                    <h3>Methodology</h3>
+                    <p>
+                        Stories were collected through anonymous surveys and interviews with CMU-Q students during Fall 2024.
+                        All identifying information has been removed to protect participant privacy. The interactive map
+                        visualizes the spatial distribution of these experiences across campus, revealing how institutional
+                        spaces shape linguistic identity.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contribution Section -->
+    <section id="contribute" class="contribute-section">
+        <div class="container">
+            <h2 class="section-title">Share Your Story</h2>
+            <p class="section-description">
+                Your linguistic experiences matter. Contribute your story to help build understanding of
+                multilingual identity at CMU-Q.
+            </p>
+
+            <form id="contribution-form" class="contribution-form">
+                <div class="form-group">
+                    <label for="story-text">Your Story *</label>
+                    <textarea
+                        id="story-text"
+                        rows="5"
+                        required
+                        placeholder="Share your experience with language, identity, or code-switching at CMU-Q..."
+                        aria-required="true"
+                    ></textarea>
+                    <small>2-4 sentences recommended</small>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="story-location">Location *</label>
+                        <select id="story-location" required aria-required="true">
+                            <option value="">Select a location</option>
+                            <option value="Academic Building">Academic Building</option>
+                            <option value="University Center">University Center</option>
+                            <option value="Library">Library</option>
+                            <option value="Dining Area">Dining Area</option>
+                            <option value="Residence Halls">Residence Halls</option>
+                            <option value="Outdoor Spaces">Outdoor Spaces</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="story-type">Experience Type *</label>
+                        <select id="story-type" required aria-required="true">
+                            <option value="">Select a type</option>
+                            <option value="Linguistic Shame">Linguistic Shame</option>
+                            <option value="Linguistic Pride">Linguistic Pride</option>
+                            <option value="Code-Switching">Code-Switching</option>
+                            <option value="Identity Negotiation">Identity Negotiation</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="story-languages">Languages Involved</label>
+                        <input
+                            type="text"
+                            id="story-languages"
+                            placeholder="e.g., Arabic, English, French"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="story-profile">Student Background (optional)</label>
+                        <input
+                            type="text"
+                            id="story-profile"
+                            placeholder="e.g., International Student from..."
+                        >
+                    </div>
+                </div>
+
+                <div class="privacy-notice">
+                    <p>
+                        <strong>Privacy Notice:</strong> This is a demonstration interface. In a production environment,
+                        submissions would be reviewed for privacy and appropriateness before publication. No personally
+                        identifying information will be shared.
+                    </p>
+                </div>
+
+                <button type="submit" class="submit-button">Submit Story</button>
+            </form>
+
+            <div id="submission-success" class="success-message" style="display: none;">
+                <p>✓ Thank you for sharing your story! It has been added to the map.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>
+                <strong>Language Identity Map</strong><br>
+                CMU-Q Multimodal Project, Fall 2024<br>
+                Created for academic exploration of linguistic identity in the Arabian Gulf
+            </p>
+            <div class="footer-links">
+                <a href="#hero">Home</a>
+                <a href="#map-section">Map</a>
+                <a href="#about">About</a>
+                <a href="#contribute">Contribute</a>
+            </div>
+            <p class="footer-note">
+                This project explores real experiences of multilingual students. All stories are anonymized
+                to protect participant privacy.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Tooltip Overlay -->
+    <div id="concept-tooltip" class="concept-tooltip" style="display: none;">
+        <div class="tooltip-content">
+            <h4 id="tooltip-title"></h4>
+            <p id="tooltip-description"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
