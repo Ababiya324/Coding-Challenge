@@ -1,0 +1,462 @@
+/* ===================================
+   LinguaSpace - Layout & Responsive
+   Grid System, Responsive Design
+   =================================== */
+
+/* ========== CONTENT GRID ========== */
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+.content-main {
+    min-width: 0; /* Prevents grid blowout */
+}
+
+/* ========== RESPONSIVE BREAKPOINTS ========== */
+
+/* Large Desktop (1400px+) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1400px;
+    }
+}
+
+/* Desktop (1024px - 1399px) */
+@media (max-width: 1399px) {
+    .content-grid {
+        grid-template-columns: 1fr 300px;
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        grid-row: 1;
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .sidebar .widget {
+        display: inline-block;
+        width: calc(50% - var(--spacing-sm));
+        margin-right: var(--spacing-md);
+        vertical-align: top;
+    }
+
+    .sidebar .widget:nth-child(even) {
+        margin-right: 0;
+    }
+
+    .header-content {
+        flex-wrap: wrap;
+    }
+
+    .header-search {
+        order: 3;
+        width: 100%;
+        margin-top: var(--spacing-md);
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+/* Mobile (up to 767px) */
+@media (max-width: 767px) {
+    /* Container */
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+
+    /* Typography */
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+
+    /* Header */
+    .header-content {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .logo h1 {
+        font-size: 1.25rem;
+    }
+
+    .header-search {
+        width: 100%;
+        order: 2;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+        order: 3;
+    }
+
+    .header-actions select {
+        flex: 1;
+    }
+
+    .header-actions .btn-primary {
+        font-size: 0.875rem;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    /* Navigation */
+    .nav ul {
+        gap: var(--spacing-md);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-link {
+        white-space: nowrap;
+        font-size: 0.9rem;
+    }
+
+    /* Hero */
+    .hero {
+        padding: var(--spacing-xl) var(--spacing-lg);
+    }
+
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .btn-hero {
+        font-size: 1rem;
+        padding: var(--spacing-sm) var(--spacing-lg);
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .filter-bar .btn-secondary {
+        width: 100%;
+    }
+
+    /* Post Card */
+    .post-card {
+        flex-direction: column;
+        padding: var(--spacing-md);
+    }
+
+    .vote-section {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        order: 2;
+        margin-top: var(--spacing-md);
+        padding-top: var(--spacing-md);
+        border-top: 1px solid var(--border-color);
+    }
+
+    .vote-section .vote-btn {
+        font-size: 1.25rem;
+    }
+
+    .post-content {
+        order: 1;
+    }
+
+    .post-title {
+        font-size: 1.125rem;
+    }
+
+    .post-actions {
+        flex-wrap: wrap;
+        gap: var(--spacing-md);
+    }
+
+    /* Categories Grid */
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Sidebar */
+    .sidebar .widget {
+        display: block;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: var(--spacing-md);
+    }
+
+    /* Comments */
+    .comment.nested {
+        margin-left: var(--spacing-md);
+    }
+
+    .comment.nested-2 {
+        margin-left: var(--spacing-lg);
+    }
+
+    /* Modal */
+    .modal {
+        padding: var(--spacing-md);
+    }
+
+    .modal-content {
+        padding: var(--spacing-lg);
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .modal-close {
+        top: var(--spacing-md);
+        right: var(--spacing-md);
+    }
+
+    /* Post Detail */
+    .post-detail .post-title {
+        font-size: 1.5rem;
+    }
+
+    .post-detail .post-content-full {
+        font-size: 1rem;
+    }
+
+    /* Form */
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+
+    .username-generator {
+        flex-direction: column;
+    }
+
+    .username-generator button {
+        width: 100%;
+    }
+
+    .checkbox-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Page Content */
+    .page-content {
+        padding: var(--spacing-lg);
+    }
+
+    /* Toast */
+    .toast {
+        left: var(--spacing-md);
+        right: var(--spacing-md);
+        bottom: var(--spacing-md);
+        max-width: none;
+    }
+}
+
+/* Small Mobile (up to 480px) */
+@media (max-width: 480px) {
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.125rem; }
+
+    .hero h2 {
+        font-size: 1.25rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+    }
+
+    .post-card {
+        padding: var(--spacing-sm);
+    }
+
+    .widget {
+        padding: var(--spacing-md);
+    }
+
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+
+    .nav ul {
+        gap: var(--spacing-sm);
+    }
+
+    .header-actions {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .header-actions select,
+    .header-actions .btn-primary {
+        width: 100%;
+    }
+}
+
+/* ========== LANDSCAPE ORIENTATION ========== */
+
+@media (max-height: 600px) and (orientation: landscape) {
+    .modal-content {
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+
+    .hero {
+        padding: var(--spacing-lg);
+    }
+}
+
+/* ========== PRINT STYLES ========== */
+
+@media print {
+    .header,
+    .sidebar,
+    .filter-bar,
+    .vote-section,
+    .post-actions,
+    .btn-primary,
+    .btn-secondary,
+    .modal,
+    .toast {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+    }
+
+    .post-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========== REDUCED MOTION ========== */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ========== HIGH CONTRAST MODE ========== */
+
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000;
+        --text-secondary: #000;
+    }
+
+    .post-card,
+    .category-card,
+    .widget {
+        border: 2px solid #000;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        border: 2px solid #000;
+    }
+}
+
+/* ========== DARK MODE (Future Enhancement) ========== */
+
+@media (prefers-color-scheme: dark) {
+    /* Placeholder for dark mode styles */
+    /* Can be implemented as a future enhancement */
+}
+
+/* ========== FLEX UTILITIES ========== */
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-between {
+    justify-content: space-between;
+}
+
+.flex-gap-sm {
+    gap: var(--spacing-sm);
+}
+
+.flex-gap-md {
+    gap: var(--spacing-md);
+}
+
+.flex-gap-lg {
+    gap: var(--spacing-lg);
+}
+
+/* ========== GRID UTILITIES ========== */
+
+.grid {
+    display: grid;
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-gap-sm {
+    gap: var(--spacing-sm);
+}
+
+.grid-gap-md {
+    gap: var(--spacing-md);
+}
+
+.grid-gap-lg {
+    gap: var(--spacing-lg);
+}
+
+/* ========== CONTAINER QUERIES (Future Enhancement) ========== */
+
+/* Modern browsers support container queries for more granular responsive design */
+/* Can be added as progressive enhancement */

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LinguaSpace - A community forum for multilingual students exploring linguistic identity">
+    <title>LinguaSpace - Where Multilingual Voices Find Community</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><span class="logo-icon">🗣️</span> LinguaSpace</h1>
+                </div>
+
+                <div class="header-search">
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search stories, topics, languages..."
+                        aria-label="Search forum">
+                    <span class="search-icon">🔍</span>
+                </div>
+
+                <div class="header-actions">
+                    <select id="sortSelect" aria-label="Sort posts">
+                        <option value="hot">🔥 Hot</option>
+                        <option value="new">🆕 New</option>
+                        <option value="top-week">📈 Top Week</option>
+                        <option value="top-month">📈 Top Month</option>
+                        <option value="top-all">📈 Top All Time</option>
+                    </select>
+
+                    <button id="shareStoryBtn" class="btn-primary pulse" aria-label="Share your story">
+                        ✍️ Share Your Story
+                    </button>
+                </div>
+            </div>
+
+            <nav class="nav" role="navigation">
+                <ul>
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="categories">Categories</a></li>
+                    <li><a href="#" class="nav-link" data-page="about">About</a></li>
+                    <li><a href="#" class="nav-link" data-page="guidelines">Community Guidelines</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" role="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero" id="heroSection">
+                <h2>Where Multilingual Voices Find Community</h2>
+                <p>A safe, anonymous space where students share experiences, validate each other's struggles, and build community around multilingual identity challenges.</p>
+                <button class="btn-hero" onclick="document.getElementById('shareStoryBtn').click()">
+                    Join the Conversation
+                </button>
+            </section>
+
+            <div class="content-grid">
+                <!-- Main Content Area -->
+                <div class="content-main">
+                    <!-- Story of the Week -->
+                    <section class="featured-section" id="featuredPost">
+                        <h3>⭐ Story of the Week</h3>
+                        <div id="featuredPostContainer"></div>
+                    </section>
+
+                    <!-- Categories Section -->
+                    <section class="categories-section" id="categoriesSection">
+                        <h3>Browse Communities</h3>
+                        <div class="categories-grid" id="categoriesGrid"></div>
+                    </section>
+
+                    <!-- Filter Bar -->
+                    <section class="filter-bar" id="filterBar">
+                        <div class="filter-group">
+                            <label>Category:</label>
+                            <select id="categoryFilter" aria-label="Filter by category">
+                                <option value="all">All Communities</option>
+                                <option value="AccentAnxiety">r/AccentAnxiety</option>
+                                <option value="CodeSwitchingStruggles">r/CodeSwitchingStruggles</option>
+                                <option value="TranslanguagingWins">r/TranslanguagingWins</option>
+                                <option value="NotEnoughTooMuch">r/NotEnoughTooMuch</option>
+                                <option value="LanguagePolicing">r/LanguagePolicing</option>
+                                <option value="MultilingualPride">r/MultilingualPride</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label>Language:</label>
+                            <select id="languageFilter" aria-label="Filter by language">
+                                <option value="all">All Languages</option>
+                                <option value="Arabic">Arabic</option>
+                                <option value="English">English</option>
+                                <option value="Multilingual">Multilingual</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label>Experience:</label>
+                            <select id="experienceFilter" aria-label="Filter by experience type">
+                                <option value="all">All Types</option>
+                                <option value="Linguistic Shame">Shame</option>
+                                <option value="Pride">Pride</option>
+                                <option value="Negotiation">Negotiation</option>
+                                <option value="Code-Switching">Code-Switching</option>
+                            </select>
+                        </div>
+
+                        <button id="clearFilters" class="btn-secondary">Clear Filters</button>
+                    </section>
+
+                    <!-- Active Filters -->
+                    <div id="activeFilters" class="active-filters"></div>
+
+                    <!-- Posts Feed -->
+                    <section class="posts-section">
+                        <h3>Recent Stories</h3>
+                        <div id="postsFeed" class="posts-feed"></div>
+                        <button id="loadMoreBtn" class="btn-secondary load-more">Load More Stories</button>
+                    </section>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="sidebar" role="complementary">
+                    <!-- Community Stats -->
+                    <div class="widget stats-widget">
+                        <h4>📊 LinguaSpace Stats</h4>
+                        <ul class="stats-list">
+                            <li><span class="stat-icon">🗣️</span> <strong id="totalPosts">0</strong> stories shared</li>
+                            <li><span class="stat-icon">💬</span> <strong id="totalComments">0</strong> comments</li>
+                            <li><span class="stat-icon">👥</span> Active community</li>
+                            <li><span class="stat-icon">🌍</span> <strong>12+</strong> languages</li>
+                        </ul>
+                    </div>
+
+                    <!-- Trending Topics -->
+                    <div class="widget trending-widget">
+                        <h4>🔥 Trending Topics</h4>
+                        <ul id="trendingTopics" class="trending-list"></ul>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="widget links-widget">
+                        <h4>Quick Links</h4>
+                        <ul class="links-list">
+                            <li><a href="#" data-page="about">About the Project</a></li>
+                            <li><a href="#" data-page="guidelines">Community Guidelines</a></li>
+                            <li><a href="#" onclick="showAcademicConcepts()">Academic Concepts</a></li>
+                            <li><a href="#" onclick="showResources()">Resources</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- About Widget -->
+                    <div class="widget about-widget">
+                        <h4>About LinguaSpace</h4>
+                        <p>A community forum exploring linguistic identity, translanguaging, and multilingual experiences at CMU-Q.</p>
+                        <p class="disclaimer">⚠️ Demo mode: All data stored locally</p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Post Detail Modal -->
+    <div id="postModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="postModalTitle">
+        <div class="modal-content modal-large">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div id="postDetailContainer"></div>
+
+            <div class="comments-section">
+                <h3>💬 Comments</h3>
+                <div class="comment-sort">
+                    <label>Sort by:</label>
+                    <select id="commentSort">
+                        <option value="best">Best</option>
+                        <option value="new">New</option>
+                        <option value="controversial">Controversial</option>
+                    </select>
+                </div>
+                <div id="commentsContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Story Modal -->
+    <div id="shareModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h2 id="shareModalTitle">✍️ Share Your Story</h2>
+
+            <form id="shareStoryForm">
+                <div class="form-group">
+                    <label for="storyCategory">Community *</label>
+                    <select id="storyCategory" required>
+                        <option value="">Select a community...</option>
+                        <option value="AccentAnxiety">r/AccentAnxiety</option>
+                        <option value="CodeSwitchingStruggles">r/CodeSwitchingStruggles</option>
+                        <option value="TranslanguagingWins">r/TranslanguagingWins</option>
+                        <option value="NotEnoughTooMuch">r/NotEnoughTooMuch</option>
+                        <option value="LanguagePolicing">r/LanguagePolicing</option>
+                        <option value="MultilingualPride">r/MultilingualPride</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="storyTitle">Title *</label>
+                    <input type="text" id="storyTitle" required maxlength="200"
+                           placeholder="Give your story a compelling title...">
+                    <span class="char-count"><span id="titleCount">0</span>/200</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="storyContent">Your Story *</label>
+                    <textarea id="storyContent" required rows="6" maxlength="1000"
+                              placeholder="Share your experience... Feel free to mix languages naturally (translanguaging welcome!)"></textarea>
+                    <span class="char-count"><span id="contentCount">0</span>/1000</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Languages Used</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="language" value="Arabic"> Arabic</label>
+                        <label><input type="checkbox" name="language" value="English"> English</label>
+                        <label><input type="checkbox" name="language" value="Urdu"> Urdu</label>
+                        <label><input type="checkbox" name="language" value="Hindi"> Hindi</label>
+                        <label><input type="checkbox" name="language" value="French"> French</label>
+                        <label><input type="checkbox" name="language" value="Other"> Other</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="experienceType">Experience Type</label>
+                    <select id="experienceType">
+                        <option value="Linguistic Shame">Linguistic Shame</option>
+                        <option value="Pride">Pride</option>
+                        <option value="Negotiation">Identity Negotiation</option>
+                        <option value="Code-Switching">Code-Switching</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="anonymousUsername">Anonymous Username</label>
+                    <div class="username-generator">
+                        <input type="text" id="anonymousUsername" readonly>
+                        <button type="button" id="regenerateUsername" class="btn-secondary">🔄 Regenerate</button>
+                    </div>
+                </div>
+
+                <p class="form-disclaimer">
+                    ⚠️ This is a demo application. Stories are stored locally in your browser and will not be shared publicly.
+                </p>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeShareModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">🚀 Share Story</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="aboutPage" class="page-content" style="display: none;">
+        <div class="about-content">
+            <h2>About LinguaSpace</h2>
+
+            <section class="about-section">
+                <h3>Project Purpose</h3>
+                <p>LinguaSpace is an academic project exploring linguistic identity, shame, and translanguaging among multilingual students in the Arabian Gulf region, specifically at Carnegie Mellon University Qatar (CMU-Q).</p>
+                <p>This platform provides a safe, anonymous space where students can share their experiences with linguistic identity navigation, accent anxiety, code-switching challenges, and the complex negotiations of multilingual life.</p>
+            </section>
+
+            <section class="about-section">
+                <h3>Academic Concepts</h3>
+
+                <div class="concept-card">
+                    <h4>💡 Linguistic Shame (Sara Hillman)</h4>
+                    <p>The feeling of inadequacy or embarrassment about one's language use, accent, or perceived language deficiency. Often experienced by multilingual individuals when navigating between linguistic communities.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>🌐 Translanguaging</h4>
+                    <p>The natural practice of multilingual speakers seamlessly moving between languages in communication. Rather than keeping languages separate, translanguaging recognizes the fluid, dynamic nature of multilingual expression.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>⏱️ Chronotope (Blommaert)</h4>
+                    <p>The concept that language use is inseparable from specific times and places. Different contexts (classroom vs. home, formal vs. informal) shape which languages and varieties are considered appropriate or valued.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>🎭 Identity Negotiation</h4>
+                    <p>The ongoing process of navigating multiple linguistic identities, especially the feeling of being "not enough" or "too much" in different cultural and linguistic contexts.</p>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <h3>How to Participate</h3>
+                <ol>
+                    <li><strong>Browse Stories:</strong> Explore the six community categories to find experiences that resonate with you</li>
+                    <li><strong>Engage:</strong> Upvote stories that speak to you, comment with support and validation</li>
+                    <li><strong>Share:</strong> Click "Share Your Story" to contribute your own experiences (all anonymous)</li>
+                    <li><strong>Connect:</strong> Find solidarity in shared struggles and celebrate multilingual pride together</li>
+                </ol>
+            </section>
+
+            <section class="about-section">
+                <h3>Research Context</h3>
+                <p>This project builds on research in sociolinguistics, multilingualism, and linguistic anthropology, particularly work by:</p>
+                <ul>
+                    <li>Sara Hillman on linguistic shame and insecurity</li>
+                    <li>Jan Blommaert on sociolinguistic scales and chronotopes</li>
+                    <li>Ofelia García on translanguaging pedagogy</li>
+                    <li>Studies on Gulf multilingualism and expatriate identity</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- Community Guidelines Page -->
+    <div id="guidelinesPage" class="page-content" style="display: none;">
+        <div class="guidelines-content">
+            <h2>Community Guidelines</h2>
+
+            <section class="guideline-section">
+                <h3>🤝 Our Values</h3>
+                <ul>
+                    <li><strong>Validation over Judgment:</strong> We support each other's experiences</li>
+                    <li><strong>Anonymity & Safety:</strong> Share without fear of identification</li>
+                    <li><strong>Linguistic Diversity:</strong> All languages, accents, and varieties are welcome</li>
+                    <li><strong>Empathy First:</strong> Assume good faith and respond with kindness</li>
+                </ul>
+            </section>
+
+            <section class="guideline-section">
+                <h3>✅ Encouraged</h3>
+                <ul>
+                    <li>Sharing personal linguistic experiences and struggles</li>
+                    <li>Offering support and validation to others</li>
+                    <li>Mixing languages naturally (translanguaging)</li>
+                    <li>Asking questions and seeking understanding</li>
+                    <li>Celebrating multilingual identity and pride</li>
+                    <li>Connecting academic concepts to lived experiences</li>
+                </ul>
+            </section>
+
+            <section class="guideline-section">
+                <h3>❌ Not Allowed</h3>
+                <ul>
+                    <li>Correcting or policing others' language use</li>
+                    <li>Dismissing or minimizing others' experiences</li>
+                    <li>Attempting to identify anonymous users</li>
+                    <li>Harassment, discrimination, or hate speech</li>
+                    <li>Off-topic content unrelated to linguistic identity</li>
+                </ul>
+            </section>
+
+            <section class="guideline-section">
+                <h3>💬 Engaging Meaningfully</h3>
+                <p>When commenting:</p>
+                <ul>
+                    <li>Start with validation: "I felt this deeply..." or "You're not alone..."</li>
+                    <li>Share similar experiences if relevant</li>
+                    <li>Offer support without trying to "fix" the person</li>
+                    <li>Avoid giving unsolicited advice</li>
+                    <li>Use upvotes generously to show solidarity</li>
+                </ul>
+            </section>
+
+            <section class="guideline-section">
+                <h3>🛡️ Safety & Privacy</h3>
+                <p>This is a demo application for academic purposes. All data is stored locally in your browser. However:</p>
+                <ul>
+                    <li>Avoid sharing identifying information</li>
+                    <li>Keep stories general enough to maintain anonymity</li>
+                    <li>Remember that screenshots can be taken</li>
+                    <li>If you need professional support, seek appropriate resources</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/voting.js"></script>
+    <script src="js/comments.js"></script>
+    <script src="js/posts.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
