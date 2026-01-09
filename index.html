@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Challenge - Interactive Algorithms</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .algorithms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .algorithm-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .algorithm-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .algorithm-card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .algorithm-card p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .result pre {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #333;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .result .value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Interactive Coding Challenges</h1>
+            <p>Explore classic algorithms with interactive visualizations</p>
+        </header>
+
+        <div class="algorithms">
+            <!-- Tower of Hanoi -->
+            <div class="algorithm-card">
+                <h2>🗼 Tower of Hanoi</h2>
+                <p>The Tower of Hanoi is a classic mathematical puzzle that demonstrates recursion. Move all disks from the source rod to the target rod.</p>
+
+                <div class="input-group">
+                    <label for="hanoi-disks">Number of Disks:</label>
+                    <input type="number" id="hanoi-disks" min="1" max="10" value="3" placeholder="Enter number of disks (1-10)">
+                </div>
+
+                <button onclick="solveHanoi()">Solve Hanoi</button>
+
+                <div id="hanoi-result" class="result">
+                    <h3>Solution Steps:</h3>
+                    <pre id="hanoi-output"></pre>
+                </div>
+            </div>
+
+            <!-- Longest Increasing Subsequence -->
+            <div class="algorithm-card">
+                <h2>📈 Longest Increasing Subsequence</h2>
+                <p>Find the length of the longest increasing subsequence in an array using dynamic programming.</p>
+
+                <div class="input-group">
+                    <label for="lis-array">Array (comma-separated):</label>
+                    <input type="text" id="lis-array" placeholder="e.g., 10,9,2,5,3,7,101,18" value="10,9,2,5,3,7,101,18">
+                </div>
+
+                <button onclick="solveLIS()">Find LIS Length</button>
+
+                <div id="lis-result" class="result">
+                    <h3>Result:</h3>
+                    <p>Length of LIS: <span id="lis-output" class="value"></span></p>
+                    <p id="lis-array-display"></p>
+                </div>
+            </div>
+
+            <!-- Roman to Integer -->
+            <div class="algorithm-card">
+                <h2>🏛️ Roman to Integer</h2>
+                <p>Convert Roman numerals to their integer values. Supports standard Roman numeral notation.</p>
+
+                <div class="input-group">
+                    <label for="roman-input">Roman Numeral:</label>
+                    <input type="text" id="roman-input" placeholder="e.g., MCMXCIV" value="MCMXCIV" style="text-transform: uppercase;">
+                </div>
+
+                <button onclick="solveRoman()">Convert to Integer</button>
+
+                <div id="roman-result" class="result">
+                    <h3>Result:</h3>
+                    <p><span id="roman-input-display"></span> = <span id="roman-output" class="value"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Coding Challenge - Interactive Algorithms</p>
+        </footer>
+    </div>
+
+    <script>
+        // Tower of Hanoi Algorithm
+        function hanoi(n, source, target, auxiliary, moves) {
+            if (n === 1) {
+                moves.push(`Move disk 1 from ${source} to ${target}`);
+                return;
+            }
+
+            // Move n-1 disks from source to auxiliary using target as helper
+            hanoi(n - 1, source, auxiliary, target, moves);
+
+            // Move the nth disk from source to target
+            moves.push(`Move disk ${n} from ${source} to ${target}`);
+
+            // Move n-1 disks from auxiliary to target using source as helper
+            hanoi(n - 1, auxiliary, target, source, moves);
+        }
+
+        function solveHanoi() {
+            const disks = parseInt(document.getElementById('hanoi-disks').value);
+            const resultDiv = document.getElementById('hanoi-result');
+            const outputPre = document.getElementById('hanoi-output');
+
+            if (isNaN(disks) || disks < 1 || disks > 10) {
+                outputPre.innerHTML = '<span class="error">Please enter a valid number between 1 and 10</span>';
+                resultDiv.classList.add('show');
+                return;
+            }
+
+            const moves = [];
+            hanoi(disks, 'A', 'C', 'B', moves);
+
+            outputPre.textContent = moves.join('\n');
+            resultDiv.classList.add('show');
+        }
+
+        // Longest Increasing Subsequence Algorithm
+        function LIS(arr) {
+            const n = arr.length;
+            const dp = new Array(n).fill(1);
+
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < i; j++) {
+                    if (arr[j] < arr[i]) {
+                        dp[i] = Math.max(dp[i], dp[j] + 1);
+                    }
+                }
+            }
+
+            return Math.max(...dp);
+        }
+
+        function solveLIS() {
+            const input = document.getElementById('lis-array').value;
+            const resultDiv = document.getElementById('lis-result');
+            const outputSpan = document.getElementById('lis-output');
+            const arrayDisplay = document.getElementById('lis-array-display');
+
+            try {
+                const arr = input.split(',').map(num => parseInt(num.trim()));
+
+                if (arr.some(isNaN) || arr.length === 0) {
+                    throw new Error('Invalid input');
+                }
+
+                const result = LIS(arr);
+
+                outputSpan.textContent = result;
+                arrayDisplay.innerHTML = `<strong>Input Array:</strong> [${arr.join(', ')}]`;
+                resultDiv.classList.add('show');
+            } catch (error) {
+                outputSpan.innerHTML = '<span class="error">Please enter valid comma-separated numbers</span>';
+                arrayDisplay.textContent = '';
+                resultDiv.classList.add('show');
+            }
+        }
+
+        // Roman to Integer Algorithm
+        function romanToInt(s) {
+            const romanMap = {
+                'I': 1, 'V': 5, 'X': 10, 'L': 50,
+                'C': 100, 'D': 500, 'M': 1000
+            };
+
+            let total = 0;
+            let prevValue = 0;
+
+            for (let i = s.length - 1; i >= 0; i--) {
+                const value = romanMap[s[i]];
+                if (value < prevValue) {
+                    total -= value;
+                } else {
+                    total += value;
+                }
+                prevValue = value;
+            }
+
+            return total;
+        }
+
+        function solveRoman() {
+            const input = document.getElementById('roman-input').value.toUpperCase().trim();
+            const resultDiv = document.getElementById('roman-result');
+            const outputSpan = document.getElementById('roman-output');
+            const inputDisplay = document.getElementById('roman-input-display');
+
+            const validRomanChars = /^[IVXLCDM]+$/;
+
+            if (!input || !validRomanChars.test(input)) {
+                outputSpan.innerHTML = '<span class="error">Please enter a valid Roman numeral</span>';
+                inputDisplay.textContent = '';
+                resultDiv.classList.add('show');
+                return;
+            }
+
+            const result = romanToInt(input);
+
+            outputSpan.textContent = result;
+            inputDisplay.textContent = input;
+            resultDiv.classList.add('show');
+        }
+
+        // Allow Enter key to trigger calculations
+        document.getElementById('hanoi-disks').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') solveHanoi();
+        });
+
+        document.getElementById('lis-array').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') solveLIS();
+        });
+
+        document.getElementById('roman-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') solveRoman();
+        });
+    </script>
+</body>
+</html>
